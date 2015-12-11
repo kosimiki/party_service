@@ -6,21 +6,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.AdminisztrátorController">
    <children>
       <HBox layoutX="14.0" layoutY="177.0" prefHeight="410.0" prefWidth="776.0">
          <children>
-            <TableView prefHeight="446.0" prefWidth="504.0">
+            <TableView fx:id="table" prefHeight="498.0" prefWidth="504.0">
               <columns>
                 <TableColumn prefWidth="133.0" text="Felhasználó név" />
                 <TableColumn minWidth="0.0" prefWidth="145.0" text="E-mail cím" />
               </columns>
             </TableView>
-            <VBox alignment="TOP_CENTER" prefHeight="521.0" prefWidth="209.0">
+            <VBox alignment="TOP_CENTER" prefHeight="521.0" prefWidth="209.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" text="Új felhasználó" />
-                  <Button mnemonicParsing="false" text="Módosítás" />
-                  <Button mnemonicParsing="false" text="Törlés" />
+                  <Button fx:id="newUser" mnemonicParsing="false" onAction="#újFelhasználó" prefHeight="31.0" prefWidth="258.0" text="Új felhasználó" />
+                  <Button fx:id="editUser" mnemonicParsing="false" onAction="#felhasználóMódosítása" prefHeight="31.0" prefWidth="286.0" text="Módosítás" />
+                  <Button fx:id="deleteUser" mnemonicParsing="false" onAction="#felhasználóTörlése" prefHeight="31.0" prefWidth="317.0" text="Törlés" />
                </children>
                <HBox.margin>
                   <Insets left="50.0" />
@@ -31,6 +31,6 @@
             </VBox>
          </children>
       </HBox>
-      <Button layoutX="719.0" layoutY="14.0" mnemonicParsing="false" text="Kilépés" />
+      <Button fx:id="logout" layoutX="719.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
    </children>
 </AnchorPane>

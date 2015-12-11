@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import hu.unideb.inf.it.main.Main;
 import hu.unideb.inf.it.main.security.Authentication;
 import hu.unideb.inf.it.main.service.LoaderFactory;
 import hu.unideb.inf.it.main.service.UserManager;
@@ -14,13 +13,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 @Component
-public class LoginController implements SceneController {
-	private Scene scene;
-	private Stage stage;
-	private Main parent;
+public class LoginController extends BaseController {
+
 	
 	@Autowired
 	private Authentication authentication;
@@ -43,15 +39,12 @@ public class LoginController implements SceneController {
 	
 	}
 
-	public void showScene(){
-		stage.setScene(scene);
-		stage.show();
-	}
+	
 	
 	public void belépés(){
 		try {
-			userManager = parent.getContext().getBean(UserManager.class);
-			authentication = parent.getContext().getBean(Authentication.class);
+			userManager = this.getParent().getContext().getBean(UserManager.class);
+			authentication = this.getParent().getContext().getBean(Authentication.class);
 			if(userManager==null)
 				System.out.println("null");
 			
@@ -81,43 +74,20 @@ public class LoginController implements SceneController {
 		}
 		if(loader!=null){
 			Scene sc = new Scene(loader.load());
-			parent.setCurrentScene(sc);
-			SceneController controller = loader.getController();
-			controller.setParent(parent);
-			controller.setStage(stage);
+			this.getParent().setCurrentScene(sc);
+			BaseController controller = loader.getController();
+			controller.setParent(this.getParent());
+			controller.setStage(this.getStage());
 			controller.setScene(sc);
-			parent.setCurrentController(controller);
-			parent.refresh();
+			this.getParent().setCurrentController(controller);
+			this.getParent().refresh();
 		}else{
 			// maradunk de kell valami hibaüzenet
 		}
 		
 	}
 
-	public Scene getScene() {
-		return scene;
-	}
-
-	public void setScene(Scene scene) {
-		this.scene = scene;
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
-
-	public Main getParent() {
-		return parent;
-	}
-
-	public void setParent(Main parent) {
-		this.parent = parent;
-	}
-
+	
 	public Authentication getAuthentication() {
 		return authentication;
 	}
@@ -133,6 +103,5 @@ public class LoginController implements SceneController {
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}
-	
-	
+
 }

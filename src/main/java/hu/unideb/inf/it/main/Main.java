@@ -5,8 +5,7 @@ import java.io.IOException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import hu.unideb.inf.it.main.controllers.LoginController;
-import hu.unideb.inf.it.main.controllers.SceneController;
+import hu.unideb.inf.it.main.controllers.BaseController;
 import hu.unideb.inf.it.main.service.LoaderFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	private SceneController currentController;
+	private BaseController currentController;
 	private Stage primaryStage;
 	private Scene currentScene;
 	private LoaderFactory loaderFactory;
@@ -45,11 +44,11 @@ public class Main extends Application {
 		this.primaryStage.setScene(currentScene);
 		this.primaryStage.show();
 	}
-	public SceneController getCurrentController() {
+	public BaseController getCurrentController() {
 		return currentController;
 	}
 
-	public void setCurrentController(SceneController currentController) {
+	public void setCurrentController(BaseController currentController) {
 		this.currentController = currentController;
 	}
 
