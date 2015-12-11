@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.RaktárosController">
+   <children>
+      <HBox layoutX="14.0" layoutY="128.0" prefHeight="456.0" prefWidth="778.0">
+         <children>
+            <TableView prefHeight="456.0" prefWidth="549.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <VBox prefHeight="456.0" prefWidth="211.0">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <children>
+                  <Button mnemonicParsing="false" text="Új raktár elem" />
+                  <Button mnemonicParsing="false" text="Módosítás" />
+                  <Button mnemonicParsing="false" text="Törlés" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <RadioButton layoutX="20.0" layoutY="96.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="275.0" text="Karbantartásra szoruló elemek" />
+      <RadioButton layoutX="290.0" layoutY="96.0" mnemonicParsing="false" text="Mosásra váró textíliáák" />
+      <Button fx:id="kilépésGomb" layoutX="699.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
+   </children>
+</AnchorPane>

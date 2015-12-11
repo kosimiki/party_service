@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="14.0" layoutY="127.0" prefHeight="473.0" prefWidth="772.0">
+         <children>
+            <TableView prefHeight="473.0" prefWidth="529.0">
+              <columns>
+                <TableColumn prefWidth="150.0" text="Rendezvény név" />
+                <TableColumn prefWidth="120.0" text="Helyszín" />
+              </columns>
+            </TableView>
+            <VBox prefHeight="473.0" prefWidth="220.0">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <children>
+                  <Button mnemonicParsing="false" text="Új rendezvény ajánlat" />
+                  <Button mnemonicParsing="false" text="Módosítás" />
+                  <Button mnemonicParsing="false" text="Törlés" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Button layoutX="680.0" layoutY="14.0" mnemonicParsing="false" text="Kijelentkezés" />
+      <RadioButton layoutX="14.0" layoutY="97.0" mnemonicParsing="false" text="Megrendelt rendezvények" />
+      <Button layoutX="497.0" layoutY="14.0" mnemonicParsing="false" text="Felhasználói ajánlatok" />
+   </children>
+</AnchorPane>
