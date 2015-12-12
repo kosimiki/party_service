@@ -40,14 +40,19 @@ public class UserFormController extends FormController {
 	@FXML
 	void handleOkClicked(ActionEvent event) {
 		if(isInputValid()){
+			User userToEdit =(User)this.getElement(); 
 			User user = new User();
+			if(userToEdit!=null)
+				user.setId(userToEdit.getId());
 			user.setFullname(fullnameField.getText());
 			user.setUsername(usernameField.getText());
 			user.setEmail(emailField.getText());
 			//ENCRYPTÁLNI KELLENE MÉG DE NEM TUDOM MILYENNEL
 			user.setPassword(passField.getText());
 			user.setPhonenumber(phoneField.getText());
+			user.setRank(rankField.getText());
 			this.getUserManager().registerUser(user);
+			this.getDialogStage().close();
 		}
 	}
 
@@ -57,13 +62,13 @@ public class UserFormController extends FormController {
 
 	}
 	
-	public void populate(){
+	public void populateForm(){
 		User user = (User)this.getElement();
 		usernameField.setText(user.getUsername());
 		fullnameField.setText(user.getFullname());
 		passwordLabel.setText("Új jelszó");
 		emailField.setText(user.getEmail());
-	
+		rankField.setText(user.getRank());
 		phoneField.setText(user.getPhonenumber());
 	}
 	

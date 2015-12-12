@@ -42,6 +42,12 @@ public class UserManagerImpl implements UserManager{
 		
 	}
 
+	@Override
+	public void delete(User user) {
+		userDAO.delete(user);
+		
+	}
+
 	
 
 }
