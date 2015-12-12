@@ -76,6 +76,7 @@ public class LoginController extends BaseController {
 			Scene sc = new Scene(loader.load());
 			this.getParent().setCurrentScene(sc);
 			BaseController controller = loader.getController();
+			controller.init();
 			controller.setParent(this.getParent());
 			controller.setStage(this.getStage());
 			controller.setScene(sc);

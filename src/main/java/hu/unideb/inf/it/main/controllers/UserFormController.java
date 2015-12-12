@@ -1,0 +1,118 @@
+package hu.unideb.inf.it.main.controllers;
+
+import hu.unideb.inf.it.main.Model.User;
+import hu.unideb.inf.it.main.security.EmailValidator;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class UserFormController extends FormController {
+
+	@FXML
+	private TextField usernameField;
+
+	@FXML
+	private TextField passField;
+
+	@FXML
+	private TextField fullnameField;
+
+	@FXML
+	private TextField rankField;
+
+	@FXML
+	private TextField emailField;
+
+	@FXML
+	private Label passwordLabel;
+
+	@FXML
+	private TextField phoneField;
+
+	@FXML
+	void resetValue(ActionEvent event) {
+
+	}
+	
+	@FXML
+	void handleOkClicked(ActionEvent event) {
+		if(isInputValid()){
+			User user = new User();
+			user.setFullname(fullnameField.getText());
+			user.setUsername(usernameField.getText());
+			user.setEmail(emailField.getText());
+			//ENCRYPTÁLNI KELLENE MÉG DE NEM TUDOM MILYENNEL
+			user.setPassword(passField.getText());
+			user.setPhonenumber(phoneField.getText());
+			this.getUserManager().registerUser(user);
+		}
+	}
+
+	@FXML
+	void handleCancel(ActionEvent event) {
+		this.getDialogStage().close();
+
+	}
+	
+	public void populate(){
+		User user = (User)this.getElement();
+		usernameField.setText(user.getUsername());
+		fullnameField.setText(user.getFullname());
+		passwordLabel.setText("Új jelszó");
+		emailField.setText(user.getEmail());
+	
+		phoneField.setText(user.getPhonenumber());
+	}
+	
+	public boolean isInputValid() {
+		String errorMsg = "";
+		
+		
+		if (usernameField.getText().isEmpty() || usernameField.getText() == null) {
+			errorMsg += "Nem lehet üres felhasználónevet megadni.";
+		}
+		
+		if (fullnameField.getText().isEmpty() || fullnameField.getText() == null) {
+			errorMsg += "Meg kell adni a felhasználó teljes nevét.";
+		}
+		if (passField.getText().isEmpty() || passField.getText() == null) {
+			errorMsg += "Nem lehet üres jelszót megadni.";
+		}
+		
+		if (emailField.getText().isEmpty() || emailField.getText() == null) {
+			errorMsg += "Nem lehet az e-mail cím mezőt üresen hagyni.";
+		}
+		try{
+			Integer.parseInt(phoneField.getText());
+		}catch(NumberFormatException e){
+			errorMsg += "A telefonszám csakis számokat tartalmazhat.";
+		}
+		
+		EmailValidator eValidator = new EmailValidator(emailField.getText());
+		if(!eValidator.validate()){
+			errorMsg += "Nem érvényes e-mail cím";
+		}
+		
+		if(usernameField.getText().length()<4 || passField.getText().length()<4){
+			errorMsg += "A felhasználó név és jelszó minimum 4 betüsek lehetnek.";
+		}
+		
+		if (errorMsg.isEmpty()) {
+			return true;
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.initOwner(this.getDialogStage());
+			alert.setTitle("Hiba");
+			alert.setHeaderText("Kérem töltse ki a mezőket megfelelően.");
+			alert.setContentText(errorMsg);
+			alert.showAndWait();
+			return false;
+
+		}
+
+	}
+
+}

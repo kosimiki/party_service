@@ -11,6 +11,8 @@ public class User {
 	
 	@Column(unique=true)
 	private String username;
+	private String fullname;
+	private String phonenumber;
 	private String password;
 	private String rank;
 	private String email;
@@ -106,5 +108,23 @@ public class User {
 	}
 	public User(){
 		super();
+	}
+
+	
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 }

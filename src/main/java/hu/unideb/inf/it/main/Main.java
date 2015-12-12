@@ -1,5 +1,6 @@
 package hu.unideb.inf.it.main;
 
+
 import java.io.IOException;
 
 import org.springframework.context.ApplicationContext;
@@ -29,6 +30,7 @@ public class Main extends Application {
 		setCurrentScene(new Scene(loader.load()));
 		setCurrentController( loader.getController());
 		//setCurrentController(context.getBean(LoginController.class));
+		currentController.init();
 		currentController.setScene(currentScene);
 		currentController.setParent(this);
 		currentController.setStage(stage);
@@ -48,6 +50,7 @@ public class Main extends Application {
 		return currentController;
 	}
 
+	
 	public void setCurrentController(BaseController currentController) {
 		this.currentController = currentController;
 	}

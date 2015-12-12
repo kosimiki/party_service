@@ -6,14 +6,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.AdminisztrátorController">
+<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" styleClass="pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.AdminisztrátorController">
    <children>
-      <HBox layoutX="14.0" layoutY="177.0" prefHeight="410.0" prefWidth="776.0">
+      <HBox layoutX="14.0" layoutY="86.0" prefHeight="659.0" prefWidth="1110.0">
          <children>
-            <TableView fx:id="table" prefHeight="498.0" prefWidth="504.0">
+            <TableView fx:id="table" prefHeight="659.0" prefWidth="893.0" stylesheets="@../css/main.css">
               <columns>
-                <TableColumn prefWidth="133.0" text="Felhasználó név" />
-                <TableColumn minWidth="0.0" prefWidth="145.0" text="E-mail cím" />
+                <TableColumn fx:id="usernameColumn" prefWidth="195.0" text="Felhasználó név" />
+                <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="157.0" text="E-mail cím" />
+                  <TableColumn fx:id="phoneColumn" prefWidth="161.0" text="Telefonszám" />
+                  <TableColumn fx:id="rankColumn" prefWidth="111.0" text="Típus" />
+                  <TableColumn fx:id="fullnameColumn" prefWidth="238.0" text="Teljes név" />
               </columns>
             </TableView>
             <VBox alignment="TOP_CENTER" prefHeight="521.0" prefWidth="209.0" spacing="20.0">
@@ -23,7 +26,7 @@
                   <Button fx:id="deleteUser" mnemonicParsing="false" onAction="#felhasználóTörlése" prefHeight="31.0" prefWidth="317.0" text="Törlés" />
                </children>
                <HBox.margin>
-                  <Insets left="50.0" />
+                  <Insets left="50.0" top="50.0" />
                </HBox.margin>
                <opaqueInsets>
                   <Insets />
@@ -31,6 +34,6 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="logout" layoutX="719.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
+      <Button fx:id="logout" layoutX="1030.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
    </children>
 </AnchorPane>
