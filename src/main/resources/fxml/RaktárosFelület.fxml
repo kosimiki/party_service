@@ -6,30 +6,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.RaktárosController">
+<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" styleClass="pane" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.raktáros.RaktárosController">
    <children>
-      <HBox layoutX="14.0" layoutY="128.0" prefHeight="456.0" prefWidth="778.0">
+      <HBox layoutX="14.0" layoutY="86.0" prefHeight="659.0" prefWidth="1110.0">
          <children>
-            <TableView prefHeight="456.0" prefWidth="549.0">
+            <TableView fx:id="table" prefHeight="659.0" prefWidth="893.0" stylesheets="@../css/main.css">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="nameColumn" prefWidth="271.0" text="Megnevezés" />
+                <TableColumn fx:id="typeColumn" minWidth="0.0" prefWidth="164.0" text="Típus" />
+                  <TableColumn fx:id="stateColumn" prefWidth="174.0" text="Állapot" />
+                  <TableColumn fx:id="rentCountColumn" prefWidth="258.0" text="Kölcsönzések száma" />
               </columns>
             </TableView>
-            <VBox prefHeight="456.0" prefWidth="211.0">
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
+            <VBox alignment="TOP_CENTER" prefHeight="521.0" prefWidth="209.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" text="Új raktár elem" />
-                  <Button mnemonicParsing="false" text="Módosítás" />
-                  <Button mnemonicParsing="false" text="Törlés" />
+                  <Button fx:id="newUser" mnemonicParsing="false" onAction="#újRaktárElem" prefHeight="31.0" prefWidth="258.0" text="Új raktár elem" />
+                  <Button fx:id="editUser" mnemonicParsing="false" onAction="#raktárElemMódosítása" prefHeight="31.0" prefWidth="286.0" text="Módosítás" />
+                  <Button fx:id="deleteUser" mnemonicParsing="false" onAction="#raktárelemTörlése" prefHeight="31.0" prefWidth="317.0" text="Törlés" />
                </children>
+               <HBox.margin>
+                  <Insets left="50.0" top="50.0" />
+               </HBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </VBox>
          </children>
       </HBox>
-      <RadioButton layoutX="20.0" layoutY="96.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="275.0" text="Karbantartásra szoruló elemek" />
-      <RadioButton layoutX="290.0" layoutY="96.0" mnemonicParsing="false" text="Mosásra váró textíliáák" />
-      <Button fx:id="kilépésGomb" layoutX="699.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
+      <Button fx:id="logout" layoutX="1030.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
+      <CheckBox fx:id="machineState" layoutX="683.0" layoutY="47.0" mnemonicParsing="false" onAction="#szervízreSzorulóGépek" styleClass="label-bright" text="Szervízre szoruló gépek" />
    </children>
 </AnchorPane>
