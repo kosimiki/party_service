@@ -38,7 +38,7 @@ public class UserFormController extends FormController {
 	}
 	
 	@FXML
-	void handleOkClicked(ActionEvent event) {
+	void handleOkClicked() {
 		if(isInputValid()){
 			User userToEdit =(User)this.getElement(); 
 			User user = new User();
@@ -57,7 +57,7 @@ public class UserFormController extends FormController {
 	}
 
 	@FXML
-	void handleCancel(ActionEvent event) {
+	void handleCancel() {
 		this.getDialogStage().close();
 
 	}
@@ -114,6 +114,7 @@ public class UserFormController extends FormController {
 			alert.setHeaderText("Kérem töltse ki a mezőket megfelelően.");
 			alert.setContentText(errorMsg);
 			alert.showAndWait();
+			
 			return false;
 
 		}

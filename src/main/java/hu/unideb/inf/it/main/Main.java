@@ -11,6 +11,7 @@ import hu.unideb.inf.it.main.service.LoaderFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -25,6 +26,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException {
 		context =  new ClassPathXmlApplicationContext("spring.xml");
 		primaryStage = stage;
+		primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/party_service.png")));
 		loaderFactory = new LoaderFactory();
 		loader = loaderFactory.getLoginLoader();
 		setCurrentScene(new Scene(loader.load()));

@@ -19,80 +19,84 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AdminisztrátorController extends BaseController{
-	
+public class AdminisztrátorController extends BaseController {
+
 	@FXML
-    private TableColumn<User, String> usernameColumn;
+	private TableColumn<User, String> usernameColumn;
 
-    @FXML
-    private TableColumn<User, String> rankColumn;
+	@FXML
+	private TableColumn<User, String> rankColumn;
 
-    @FXML
-    private TableColumn<User, String> fullnameColumn;
+	@FXML
+	private TableColumn<User, String> fullnameColumn;
 
+	@FXML
+	private TableView<User> table;
 
-    @FXML
-    private TableView<User> table;
+	@FXML
+	private TableColumn<User, String> phoneColumn;
 
-    @FXML
-    private TableColumn<User, String> phoneColumn;
+	@FXML
+	private TableColumn<User, String> emailColumn;
 
-    @FXML
-    private TableColumn<User, String> emailColumn;
-    
-    private  ObservableList<User> users;
-    
-    private UserManager userManager;
-    
-    public void init(){
-    ContextManager cm = new ContextManager();
-    userManager = cm.getContext().getBean(UserManager.class);
-    List<User> userList = userManager.getAllUser();
-    for(User u: userList){
-    	System.out.println(u.getUsername());
-    }
-    users = FXCollections.observableArrayList(userList);
-    usernameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
-    fullnameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fullname"));
-    emailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
-    rankColumn.setCellValueFactory(new PropertyValueFactory<User,String>("rank"));
-    phoneColumn.setCellValueFactory(new PropertyValueFactory<User, String>("phonenumber"));
-    table.setItems(users);
-    }
+	private ObservableList<User> users;
 
-    @FXML
-    void újFelhasználó() {
-      	this.showEditDialog(null);
-    	reload();
-    }
+	private UserManager userManager;
 
-    @FXML
-    void felhasználóMódosítása() {
-    	User user = table.getSelectionModel().getSelectedItem();
-    	this.showEditDialog(user);
-    	reload();
-    }
-    
-    private void reload(){
-    	users = FXCollections.observableArrayList(userManager.getAllUser());
-    	table.setItems(users);
-    }
-    
-    @FXML
-    void felhasználóTörlése() {
-    	User user = table.getSelectionModel().getSelectedItem();
-    	this.userManager.delete(user);
-    	reload();
-    }
-    
-    public boolean showEditDialog(User element) {
+	public void init() {
+		ContextManager cm = new ContextManager();
+		userManager = cm.getContext().getBean(UserManager.class);
+		List<User> userList = userManager.getAllUser();
+		for (User u : userList) {
+			System.out.println(u.getUsername());
+		}
+		users = FXCollections.observableArrayList(userList);
+		usernameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
+		fullnameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fullname"));
+		emailColumn.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+		rankColumn.setCellValueFactory(new PropertyValueFactory<User, String>("rank"));
+		phoneColumn.setCellValueFactory(new PropertyValueFactory<User, String>("phonenumber"));
+		table.setItems(users);
+	}
+
+	@FXML
+	void újFelhasználó() {
+		this.showEditDialog(null);
+		reload();
+	}
+
+	@FXML
+	void felhasználóMódosítása() {
+		User user = table.getSelectionModel().getSelectedItem();
+		this.showEditDialog(user);
+		reload();
+	}
+
+	private void reload() {
+		users = FXCollections.observableArrayList(userManager.getAllUser());
+		table.setItems(users);
+	}
+
+	@FXML
+	void felhasználóTörlése() {
+		User user = table.getSelectionModel().getSelectedItem();
+		if (user != null) {
+			Confirmation c = new Confirmation();
+			boolean answer = c.showConfirmationWindow(this.getStage(), user.getUsername());
+			if (answer == true) {
+				this.userManager.delete(user);
+				reload();
+
+			}
+		}
+	}
+
+	public boolean showEditDialog(User element) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			
-				loader.setLocation(Main.class
-						.getResource("/fxml/UserEdit.fxml"));
-			
-			
+
+			loader.setLocation(Main.class.getResource("/fxml/UserEdit.fxml"));
+
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -109,7 +113,5 @@ public class AdminisztrátorController extends BaseController{
 			return false;
 		}
 	}
-
-
 
 }
