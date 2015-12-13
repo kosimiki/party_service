@@ -1,6 +1,7 @@
-package hu.unideb.inf.it.main.controllers;
+package hu.unideb.inf.it.main.controllers.admin;
 
 import hu.unideb.inf.it.main.Model.User;
+import hu.unideb.inf.it.main.controllers.FormController;
 import hu.unideb.inf.it.main.security.EmailValidator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

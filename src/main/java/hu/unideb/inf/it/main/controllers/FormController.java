@@ -2,7 +2,9 @@ package hu.unideb.inf.it.main.controllers;
 
 import org.springframework.context.ApplicationContext;
 
+import hu.unideb.inf.it.main.controllers.raktáros.ItemFormController;
 import hu.unideb.inf.it.main.service.ContextManager;
+import hu.unideb.inf.it.main.service.StockItemManager;
 import hu.unideb.inf.it.main.service.UserManager;
 import javafx.stage.Stage;
 
@@ -12,13 +14,14 @@ public class FormController {
 	private boolean ok;
 	private ApplicationContext context;
 	private UserManager userManager;
-
+	private StockItemManager itemManager;
 	
 
 	public void setElement(Object element) {
 		ContextManager cm = new ContextManager();
 		setContext(cm.getContext());
 		userManager = context.getBean(UserManager.class);
+		setItemManager(context.getBean(StockItemManager.class));
 		if(element != null){
 			this.element = element;
 			populateForm();
@@ -71,6 +74,22 @@ public class FormController {
 
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
+	}
+
+
+	public StockItemManager getItemManager() {
+		return itemManager;
+	}
+
+
+	public void setItemManager(StockItemManager itemManager) {
+		this.itemManager = itemManager;
+	}
+
+
+	public void init() {
+		System.out.println("nincs init");
+		
 	}
 
 

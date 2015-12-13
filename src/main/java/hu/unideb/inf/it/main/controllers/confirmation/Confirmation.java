@@ -1,4 +1,4 @@
-package hu.unideb.inf.it.main.controllers;
+package hu.unideb.inf.it.main.controllers.confirmation;
 
 import java.io.IOException;
 

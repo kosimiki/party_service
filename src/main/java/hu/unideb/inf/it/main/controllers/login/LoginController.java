@@ -1,10 +1,11 @@
-package hu.unideb.inf.it.main.controllers;
+package hu.unideb.inf.it.main.controllers.login;
 
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import hu.unideb.inf.it.main.controllers.BaseController;
 import hu.unideb.inf.it.main.security.Authentication;
 import hu.unideb.inf.it.main.service.LoaderFactory;
 import hu.unideb.inf.it.main.service.UserManager;

@@ -1,10 +1,13 @@
-package hu.unideb.inf.it.main.controllers;
+package hu.unideb.inf.it.main.controllers.admin;
 
 import java.io.IOException;
 import java.util.List;
 
 import hu.unideb.inf.it.main.Main;
 import hu.unideb.inf.it.main.Model.User;
+import hu.unideb.inf.it.main.controllers.BaseController;
+import hu.unideb.inf.it.main.controllers.FormController;
+import hu.unideb.inf.it.main.controllers.confirmation.Confirmation;
 import hu.unideb.inf.it.main.service.ContextManager;
 import hu.unideb.inf.it.main.service.UserManager;
 import javafx.collections.FXCollections;

@@ -1,4 +1,4 @@
-package hu.unideb.inf.it.main.controllers;
+package hu.unideb.inf.it.main.controllers.confirmation;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
