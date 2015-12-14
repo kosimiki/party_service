@@ -5,7 +5,6 @@ import java.util.List;
 
 import hu.unideb.inf.it.main.Main;
 import hu.unideb.inf.it.main.Model.StockItem;
-import hu.unideb.inf.it.main.Model.User;
 import hu.unideb.inf.it.main.controllers.BaseController;
 import hu.unideb.inf.it.main.controllers.FormController;
 import hu.unideb.inf.it.main.controllers.confirmation.Confirmation;

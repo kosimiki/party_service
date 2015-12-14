@@ -2,7 +2,6 @@ package hu.unideb.inf.it.main.controllers;
 
 import org.springframework.context.ApplicationContext;
 
-import hu.unideb.inf.it.main.controllers.raktáros.ItemFormController;
 import hu.unideb.inf.it.main.service.ContextManager;
 import hu.unideb.inf.it.main.service.StockItemManager;
 import hu.unideb.inf.it.main.service.UserManager;
