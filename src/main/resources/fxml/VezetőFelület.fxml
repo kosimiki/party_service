@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.admin.AdminisztrátorController">
+<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.admin.VezetőController">
    <children>
       <HBox layoutX="14.0" layoutY="55.0" prefHeight="690.0" prefWidth="1110.0">
          <children>
@@ -59,7 +59,7 @@
                               <VBox alignment="TOP_CENTER" layoutX="888.0" layoutY="14.0" prefHeight="387.0" prefWidth="209.0" spacing="20.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#ajánlatElfogadása" prefHeight="31.0" prefWidth="258.0" text="Ajánlat elfogadása" />
-                                    <Button fx:id="editUser1" mnemonicParsing="false" onAction="#ajánlatElutasítása" prefHeight="31.0" prefWidth="286.0" text="Ajánlat elutasítása" />
+                                    <Button mnemonicParsing="false" onAction="#ajánlatElutasítása" prefHeight="31.0" prefWidth="286.0" text="Ajánlat elutasítása" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />
@@ -91,6 +91,6 @@
             </TabPane>
          </children>
       </HBox>
-      <Button fx:id="logout" layoutX="1030.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
+      <Button layoutX="1030.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
    </children>
 </AnchorPane>
