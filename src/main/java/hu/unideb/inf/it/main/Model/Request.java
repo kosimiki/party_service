@@ -13,6 +13,8 @@ public class Request {
 	
 	private Long userID;
 	private String request;
+	private String state;
+	
 	public Long getId() {
 		return id;
 	}
@@ -30,6 +32,12 @@ public class Request {
 	}
 	public void setRequest(String request) {
 		this.request = request;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	
