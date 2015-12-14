@@ -65,7 +65,7 @@ public class BaseController {
 	}
 	
 	public void init(){
-		System.out.println("nem jó");
+	
 	}
 
 	public void kilépés(){

@@ -53,7 +53,9 @@ public class LoginController extends BaseController {
 			String pwd = password.getText();
 			if(authentication.isSuccessfulAuthentication(un,pwd)){
 				String rank = userManager.getUserByName(un).getRank();
+				
 				switchToScene(rank);
+				
 			}else{
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.initOwner(this.getStage());
@@ -78,6 +80,13 @@ public class LoginController extends BaseController {
 		case "vezető":  loader =  new LoaderFactory().getVezetőLoader();break;
 		
 		case "raktáros":  loader =  new LoaderFactory().getRaktárosLoader();break;
+		default :
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.initOwner(this.getStage());
+			alert.setTitle("Hiba");
+			alert.setHeaderText("Nem megfelelő jog.");
+			
+			alert.showAndWait();break;
 		}
 		if(loader!=null){
 			Scene sc = new Scene(loader.load());

@@ -95,7 +95,7 @@ public class UserFormController extends FormController {
 			errorMsg += "Nem lehet az e-mail cím mezőt üresen hagyni.";
 		}
 		try{
-			Integer.parseInt(phoneField.getText());
+			Long.parseLong(phoneField.getText());
 		}catch(NumberFormatException e){
 			errorMsg += "A telefonszám csakis számokat tartalmazhat.";
 		}
