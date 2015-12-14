@@ -29,4 +29,9 @@ public class RequestManagerImpl implements RequestManager {
 		requestDAO.save(r);
 	}
 
+	@Override
+	public Request findOne(Long id) {
+		return requestDAO.findOne(id);
+	}
+
 }

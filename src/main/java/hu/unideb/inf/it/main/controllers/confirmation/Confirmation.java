@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Confirmation {
 	
 	
-	 public boolean showConfirmationWindow(Stage stage, String name) {
+	 public boolean showConfirmationWindow(Stage stage, String name, String kérdés) {
 			try {
 				FXMLLoader loader = new FXMLLoader();
 				
@@ -28,6 +28,7 @@ public class Confirmation {
 				dialogStage.setScene(scene);
 				ConfirmationController controller = loader.getController();
 				controller.setName(name);
+				controller.setKérdés(kérdés);
 				controller.setStage(dialogStage);
 				dialogStage.showAndWait();
 				return controller.isOk();

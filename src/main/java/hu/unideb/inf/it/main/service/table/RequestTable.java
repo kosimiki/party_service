@@ -2,6 +2,7 @@ package hu.unideb.inf.it.main.service.table;
 
 public class RequestTable {
 
+	private Long requestID;
 	private String userName;
 	private String request;
 	private String userEmail;
@@ -36,6 +37,12 @@ public class RequestTable {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public Long getRequestID() {
+		return requestID;
+	}
+	public void setRequestID(Long requestID) {
+		this.requestID = requestID;
 	}
 	
 	

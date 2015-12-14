@@ -3,9 +3,12 @@ package hu.unideb.inf.it.main.Model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -18,7 +21,11 @@ public class PartyEvent {
 	private String name;
 	private Long placeID;
 	private Integer price;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
+	 @JoinTable(
+		      name="PartyEvent_StockItem",
+		      joinColumns={@JoinColumn(name="PartyEvent_id", referencedColumnName="id")},
+		      inverseJoinColumns={@JoinColumn(name="items_id", referencedColumnName="id")})
 	private List<StockItem> items;
 	public Long getId() {
 		return id;

@@ -28,10 +28,10 @@
 						<Insets />
 					</GridPane.margin>
 				</Button>
-				<TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 				<TextField fx:id="username" GridPane.columnIndex="1" />
 				<Label text="Felhasználó név" />
 				<Label text="Jelszó" GridPane.rowIndex="1" />
+            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 			</children>
 		</GridPane>
 		<ImageView fx:id="logo" fitHeight="150.0" fitWidth="550.0" layoutX="21.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0">

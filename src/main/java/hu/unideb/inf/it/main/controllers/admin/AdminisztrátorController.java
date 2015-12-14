@@ -83,7 +83,7 @@ public class AdminisztrátorController extends BaseController {
 		User user = table.getSelectionModel().getSelectedItem();
 		if (user != null) {
 			Confirmation c = new Confirmation();
-			boolean answer = c.showConfirmationWindow(this.getStage(), user.getUsername());
+			boolean answer = c.showConfirmationWindow(this.getStage(),  user.getUsername(),"Biztosan szeretné Törölni?");
 			if (answer == true) {
 				this.userManager.delete(user);
 				reload();

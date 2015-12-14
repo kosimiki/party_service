@@ -28,4 +28,10 @@ public class OrderManagerImpl implements OrderManager {
 		orderDAO.delete(order);
 	}
 
+	@Override
+	public void delete(Long id) {
+		orderDAO.delete(id);
+		
+	}
+
 }

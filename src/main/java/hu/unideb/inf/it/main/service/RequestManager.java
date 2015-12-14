@@ -12,4 +12,6 @@ public interface RequestManager {
 	
 	public void accept(Request r);
 	
+	public Request findOne(Long id);
+	
 }

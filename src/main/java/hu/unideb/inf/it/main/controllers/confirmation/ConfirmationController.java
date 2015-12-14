@@ -12,6 +12,10 @@ public class ConfirmationController {
 	@FXML
     private Label toDeleteLabel;
 
+	
+	@FXML
+    private Label kérdés;
+
     @FXML
     void okClicked() {
     	this.setOk(true);
@@ -43,6 +47,22 @@ public class ConfirmationController {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+
+	public Label getToDeleteLabel() {
+		return toDeleteLabel;
+	}
+
+	public void setToDeleteLabel(Label toDeleteLabel) {
+		this.toDeleteLabel = toDeleteLabel;
+	}
+
+	public Label getKérdés() {
+		return kérdés;
+	}
+
+	public void setKérdés(String kérdés) {
+		this.kérdés.setText(kérdés);
 	}
 
 	

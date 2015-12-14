@@ -1,7 +1,8 @@
 package hu.unideb.inf.it.main.service.table;
 
 public class OrderTable {
-
+		
+		private Long orderID;
 		private String partyName;
 		private String userName;
 		private String userPhone;
@@ -29,6 +30,12 @@ public class OrderTable {
 		}
 		public void setUserEmail(String userEmail) {
 			this.userEmail = userEmail;
+		}
+		public Long getOrderID() {
+			return orderID;
+		}
+		public void setOrderID(Long orderID) {
+			this.orderID = orderID;
 		}
 		
 }

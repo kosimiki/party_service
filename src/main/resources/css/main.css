@@ -184,10 +184,11 @@
     -fx-text-fill: white;
 }
 
+
 .text-area .content {
   -fx-font-family: "Segoe UI Semibold";
-  -fx-highlight-fill: #898989;
+  -fx-highlight-fill: #FFFFFF;
   -fx-highlight-text-fill: #FFFFFF;
-  -fx-text-fill: #ababab;
+  -fx-text-fill: white;
   -fx-background-color: #1d1d1d;
 }

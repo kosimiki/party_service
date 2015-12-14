@@ -1,9 +1,14 @@
 package hu.unideb.inf.it.main.Model;
 
+
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class PartyOrder {
@@ -12,6 +17,10 @@ public class PartyOrder {
 	private Long id;
 	private Long partyID;
 	private Long userID;
+	@Temporal(TemporalType.DATE)
+	private Date partyDate;
+	@Temporal(TemporalType.DATE)
+	private Date requestDate;
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +38,18 @@ public class PartyOrder {
 	}
 	public void setUserID(Long userID) {
 		this.userID = userID;
+	}
+	public Date getPartyDate() {
+		return partyDate;
+	}
+	public void setPartyDate(Date partyDate) {
+		this.partyDate = partyDate;
+	}
+	public Date getRequestDate() {
+		return requestDate;
+	}
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
 	}
 	
 	

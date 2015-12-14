@@ -82,7 +82,7 @@ public class RaktárosController extends BaseController {
 		StockItem item = table.getSelectionModel().getSelectedItem();
 		if (item != null) {
 			Confirmation c = new Confirmation();
-			boolean answer = c.showConfirmationWindow(this.getStage(), item.getName());
+			boolean answer = c.showConfirmationWindow(this.getStage(), item.getName(),"Biztosan szeretné törölni?");
 			if (answer == true) {
 				this.manager.delete(item);
 				reload();

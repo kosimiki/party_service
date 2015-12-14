@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
@@ -34,7 +35,7 @@ public class LoginController extends BaseController {
 	private TextField username;
 	
 	@FXML
-	private TextField password;
+	private PasswordField password;
 	
 
 	
@@ -92,6 +93,8 @@ public class LoginController extends BaseController {
 			Scene sc = new Scene(loader.load());
 			this.getParent().setCurrentScene(sc);
 			BaseController controller = loader.getController();
+			if(controller==null)
+				System.out.println("null");
 			controller.init();
 			controller.setParent(this.getParent());
 			controller.setStage(this.getStage());

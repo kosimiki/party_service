@@ -16,7 +16,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="rendezvények" layoutX="87.0" layoutY="39.0" prefHeight="447.0" prefWidth="868.0" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="rendezvények" layoutX="87.0" layoutY="39.0" onMouseClicked="#rendezvényRészletei" prefHeight="447.0" prefWidth="868.0" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="rendezvényNeve" prefWidth="271.0" text="Rendezvény neve" />
                                   <TableColumn fx:id="rendezvényHelyszíne" minWidth="0.0" prefWidth="325.0" text="Rendezvény helyszíne" />
@@ -48,13 +48,13 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="ajánlatok" layoutX="83.0" layoutY="72.0" onMouseClicked="#ajánlatSzövegénekMegjelenítése" prefHeight="379.0" prefWidth="888.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="222.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="ajánlatok" layoutX="83.0" layoutY="72.0" onMouseClicked="#ajánlatSzövegénekMegjelenítése" prefHeight="379.0" prefWidth="881.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="ajánlatLétrehozó" prefWidth="147.0" text="Vevő neve" />
-                                  <TableColumn fx:id="ajánlatSzövege" minWidth="0.0" prefWidth="196.0" text="Ajánlat szövege" />
-                                    <TableColumn fx:id="vevőTelefonszáma" minWidth="0.0" prefWidth="176.0" text="Vevő telefonszáma" />
-                                    <TableColumn fx:id="vevőEmail" minWidth="0.0" prefWidth="161.0" text="Vevő e-mail címe" />
-                                    <TableColumn fx:id="ajánlatÁllapota" minWidth="0.0" prefWidth="161.0" text="Állapot" />
+                                  <TableColumn fx:id="ajánlatSzövege" minWidth="0.0" prefWidth="185.0" text="Ajánlat szövege" />
+                                    <TableColumn fx:id="vevőTelefonszáma" minWidth="0.0" prefWidth="186.0" text="Vevő telefonszáma" />
+                                    <TableColumn fx:id="vevőEmail" minWidth="0.0" prefWidth="156.0" text="Vevő e-mail címe" />
+                                    <TableColumn fx:id="ajánlatÁllapota" minWidth="0.0" prefWidth="160.0" text="Állapot" />
                                 </columns>
                               </TableView>
                               <VBox alignment="TOP_CENTER" layoutX="888.0" layoutY="14.0" prefHeight="387.0" prefWidth="209.0" spacing="20.0">
@@ -66,7 +66,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </VBox>
-                              <TextArea fx:id="ajánlatText" editable="false" layoutX="14.0" layoutY="415.0" prefHeight="226.0" prefWidth="1080.0" />
+                              <TextArea fx:id="ajánlatText" editable="false" layoutX="14.0" layoutY="415.0" prefHeight="226.0" prefWidth="1080.0" styleClass="label-bright" />
                            </children>
                         </AnchorPane>
                   </content>

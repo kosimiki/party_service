@@ -2,6 +2,7 @@ package hu.unideb.inf.it.main.service.table;
 
 public class PartyEventTable {
 
+	private Long partyID;
 	private  String name;
 	private String placeName;
 	private Integer price;
@@ -23,6 +24,13 @@ public class PartyEventTable {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	public Long getPartyID() {
+		return partyID;
+	}
+	public void setPartyID(Long partyID) {
+		this.partyID = partyID;
+	}
+	
 	
 
 }

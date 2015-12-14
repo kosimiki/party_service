@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import hu.unideb.inf.it.main.DAO.PartyEventDAO;
 import hu.unideb.inf.it.main.Model.PartyEvent;
+import hu.unideb.inf.it.main.Model.StockItem;
 
 @Component
 public class PartyEventManagerImpl implements PartyEventManager {
@@ -37,6 +39,13 @@ public class PartyEventManagerImpl implements PartyEventManager {
 	@Override
 	public PartyEvent findOne(Long id) {
 		return partyEventDAO.findOne(id);
+	}
+
+	@Transactional
+	@Override
+	public List<StockItem> getItems(Long id) {
+		return partyEventDAO.getOne(id).getItems();
+		
 	}
 
 }
