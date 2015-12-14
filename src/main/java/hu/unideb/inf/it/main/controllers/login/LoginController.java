@@ -52,6 +52,7 @@ public class LoginController extends BaseController {
 			String un = username.getText();
 			String pwd = password.getText();
 			//if(authentication.isSuccessfulAuthentication(un,pwd)){
+			System.out.println(un);
 				String rank = userManager.getUserByName(un).getRank();
 				System.out.println(rank);
 				switchToScene(rank);
@@ -70,7 +71,9 @@ public class LoginController extends BaseController {
 		FXMLLoader loader = null;
 		switch(position.toLowerCase()){
 		case "admin":  loader =  new LoaderFactory().getAdminisztrátorLoader();break;
+		case "leader":  loader =  new LoaderFactory().getVezetőLoader();break;
 		case "vezető":  loader =  new LoaderFactory().getVezetőLoader();break;
+		
 		case "raktáros":  loader =  new LoaderFactory().getRaktárosLoader();break;
 		}
 		if(loader!=null){

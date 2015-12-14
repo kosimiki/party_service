@@ -48,6 +48,12 @@ public class UserManagerImpl implements UserManager{
 		
 	}
 
+	@Override
+	public User findOne(Long id) {
+		
+		return userDAO.findOne(id);
+	}
+
 	
 
 }

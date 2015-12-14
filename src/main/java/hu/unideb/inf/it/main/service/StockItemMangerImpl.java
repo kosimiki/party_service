@@ -42,4 +42,10 @@ public class StockItemMangerImpl implements StockItemManager {
 
 	}
 
+	@Override
+	public StockItem findOne(Long id) {
+
+		return stockItemDAO.findOne(id);
+	}
+
 }

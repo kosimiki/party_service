@@ -19,5 +19,5 @@ public interface UserManager {
 
 	public void delete(User user);
 
-
+	public User findOne(Long id);
 }

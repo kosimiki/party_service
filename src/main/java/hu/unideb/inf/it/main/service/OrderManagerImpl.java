@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import hu.unideb.inf.it.main.DAO.OrderDAO;
-import hu.unideb.inf.it.main.Model.Order;
+import hu.unideb.inf.it.main.Model.PartyOrder;
 
 @Component
 public class OrderManagerImpl implements OrderManager {
@@ -19,12 +19,12 @@ public class OrderManagerImpl implements OrderManager {
 
 
 	@Override
-	public List<Order> getAllOrder() {
+	public List<PartyOrder> getAllOrder() {
 		return orderDAO.findAll();
 	}
 
 	@Override
-	public void delete(Order order) {
+	public void delete(PartyOrder order) {
 		orderDAO.delete(order);
 	}
 

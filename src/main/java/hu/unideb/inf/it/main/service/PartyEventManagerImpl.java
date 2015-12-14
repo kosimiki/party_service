@@ -13,8 +13,6 @@ public class PartyEventManagerImpl implements PartyEventManager {
 
 	@Autowired
 	private PartyEventDAO partyEventDAO;
-	
-	
 
 	@Override
 	public List<PartyEvent> getAllPartyEvent() {
@@ -34,6 +32,11 @@ public class PartyEventManagerImpl implements PartyEventManager {
 	@Override
 	public void delete(PartyEvent pe) {
 		partyEventDAO.delete(pe);
+	}
+
+	@Override
+	public PartyEvent findOne(Long id) {
+		return partyEventDAO.findOne(id);
 	}
 
 }

@@ -17,4 +17,6 @@ public interface StockItemManager {
 	public List<StockItem> getStockItemsByState(String name) ;
 
 	public void delete(StockItem item);
+	
+	public StockItem findOne(Long id);
 }

@@ -15,6 +15,6 @@ public interface PartyEventManager {
 	
 	public void delete(PartyEvent pe);
 
-	
+	public PartyEvent findOne(Long id);
 	
 }
