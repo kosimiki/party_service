@@ -50,9 +50,7 @@ public class AdminisztrátorController extends BaseController {
 		ContextManager cm = new ContextManager();
 		userManager = cm.getContext().getBean(UserManager.class);
 		List<User> userList = userManager.getAllUser();
-		for (User u : userList) {
-			System.out.println(u.getUsername());
-		}
+	
 		users = FXCollections.observableArrayList(userList);
 		usernameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
 		fullnameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fullname"));
