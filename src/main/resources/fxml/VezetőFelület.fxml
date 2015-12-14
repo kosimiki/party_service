@@ -6,30 +6,91 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="800.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="800.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.admin.AdminisztrátorController">
    <children>
-      <HBox layoutX="14.0" layoutY="127.0" prefHeight="473.0" prefWidth="772.0">
+      <HBox layoutX="14.0" layoutY="55.0" prefHeight="690.0" prefWidth="1110.0">
          <children>
-            <TableView prefHeight="473.0" prefWidth="529.0">
-              <columns>
-                <TableColumn prefWidth="150.0" text="Rendezvény név" />
-                <TableColumn prefWidth="120.0" text="Helyszín" />
-              </columns>
-            </TableView>
-            <VBox prefHeight="473.0" prefWidth="220.0">
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-               <children>
-                  <Button mnemonicParsing="false" text="Új rendezvény ajánlat" />
-                  <Button mnemonicParsing="false" text="Módosítás" />
-                  <Button mnemonicParsing="false" text="Törlés" />
-               </children>
-            </VBox>
+            <TabPane prefHeight="690.0" prefWidth="1128.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Rendezvények">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="rendezvények" layoutX="87.0" layoutY="39.0" prefHeight="447.0" prefWidth="868.0" AnchorPane.bottomAnchor="204.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="rendezvényNeve" prefWidth="271.0" text="Rendezvény neve" />
+                                  <TableColumn fx:id="rendezvényHelyszíne" minWidth="0.0" prefWidth="325.0" text="Rendezvény helyszíne" />
+                                    <TableColumn fx:id="rendezvényÁra" minWidth="0.0" prefWidth="251.0" text="Rendezvény ára" />
+                                </columns>
+                              </TableView>
+                              <VBox alignment="TOP_CENTER" layoutX="901.0" layoutY="14.0" prefHeight="400.0" prefWidth="209.0" spacing="20.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#újRedendezvény" prefHeight="31.0" prefWidth="258.0" text="Új rendezvény" />
+                                    <Button mnemonicParsing="false" onAction="#rendezvényMódosítása" prefHeight="31.0" prefWidth="286.0" text="Módosítás" />
+                                    <Button mnemonicParsing="false" onAction="#rendezvényTörlése" prefHeight="31.0" prefWidth="317.0" text="Törlés" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </VBox>
+                              <TableView fx:id="kellékek" layoutX="5.0" layoutY="447.0" prefHeight="200.0" prefWidth="854.0">
+                                <columns>
+                                  <TableColumn fx:id="kellékNeve" prefWidth="270.0" text="Kellék megnevezése" />
+                                  <TableColumn fx:id="kellékTípusa" prefWidth="269.0" text="Kellék típusa" />
+                                    <TableColumn fx:id="kellékDarabaszám" prefWidth="309.0" text="Darabszám" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Ajánlatok">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="ajánlatok" layoutX="83.0" layoutY="72.0" onMouseClicked="#ajánlatSzövegénekMegjelenítése" prefHeight="379.0" prefWidth="888.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="222.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="ajánlatLétrehozó" prefWidth="147.0" text="Vevő neve" />
+                                  <TableColumn fx:id="ajánlatSzövege" minWidth="0.0" prefWidth="196.0" text="Ajánlat szövege" />
+                                    <TableColumn fx:id="vevőTelefonszáma" minWidth="0.0" prefWidth="252.0" text="Vevő telefonszáma" />
+                                    <TableColumn fx:id="vevőEmail" minWidth="0.0" prefWidth="281.0" text="Vevő e-mail címe" />
+                                </columns>
+                              </TableView>
+                              <VBox alignment="TOP_CENTER" layoutX="888.0" layoutY="14.0" prefHeight="387.0" prefWidth="209.0" spacing="20.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#ajánlatElfogadása" prefHeight="31.0" prefWidth="258.0" text="Ajánlat elfogadása" />
+                                    <Button fx:id="editUser1" mnemonicParsing="false" onAction="#ajánlatElutasítása" prefHeight="31.0" prefWidth="286.0" text="Ajánlat elutasítása" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </VBox>
+                              <TextArea fx:id="ajánlatText" layoutX="14.0" layoutY="415.0" prefHeight="226.0" prefWidth="1080.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Megrendelések">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="megrendelések" layoutX="83.0" layoutY="72.0" prefHeight="651.0" prefWidth="879.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="231.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="megrendeltRendezényNeve" prefWidth="181.0" text="Rendezvény neve" />
+                                    <TableColumn fx:id="megrendelőNeve" prefWidth="190.0" text="Megrendelő neve" />
+                                    <TableColumn fx:id="megrendelőTelefonszáma" prefWidth="244.0" text="Megrendelő telefonszáma" />
+                                    <TableColumn fx:id="megrendelőEmail" prefWidth="252.0" text="Megrendelő e-mail címe" />
+                                 </columns>
+                              </TableView>
+                              <Button layoutX="878.0" layoutY="22.0" mnemonicParsing="false" onAction="#megrendelésTeljesítve" prefHeight="33.0" prefWidth="218.0" text="Megrendelés teljesítve" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </HBox>
-      <Button layoutX="680.0" layoutY="14.0" mnemonicParsing="false" text="Kijelentkezés" />
-      <RadioButton layoutX="14.0" layoutY="97.0" mnemonicParsing="false" text="Megrendelt rendezvények" />
-      <Button layoutX="497.0" layoutY="14.0" mnemonicParsing="false" text="Felhasználói ajánlatok" />
+      <Button fx:id="logout" layoutX="1030.0" layoutY="14.0" mnemonicParsing="false" onAction="#kilépés" text="Kilépés" />
    </children>
 </AnchorPane>
