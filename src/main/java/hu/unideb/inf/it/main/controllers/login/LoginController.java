@@ -12,8 +12,10 @@ import hu.unideb.inf.it.main.service.UserManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 @Component
 public class LoginController extends BaseController {
@@ -46,19 +48,20 @@ public class LoginController extends BaseController {
 		try {
 			userManager = this.getParent().getContext().getBean(UserManager.class);
 			authentication = this.getParent().getContext().getBean(Authentication.class);
-			if(userManager==null)
-				System.out.println("null");
 			
 			String un = username.getText();
 			String pwd = password.getText();
-			//if(authentication.isSuccessfulAuthentication(un,pwd)){
-			System.out.println(un);
+			if(authentication.isSuccessfulAuthentication(un,pwd)){
 				String rank = userManager.getUserByName(un).getRank();
-				System.out.println(rank);
 				switchToScene(rank);
-			//}else{
-				//Hiba üzenet, rossz jelszó vagy felhasználónév.
-			//}
+			}else{
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.initOwner(this.getStage());
+				alert.setTitle("Hiba");
+				alert.setHeaderText("Rossz felhasználónév vagy jelszó.");
+				
+				alert.showAndWait();
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

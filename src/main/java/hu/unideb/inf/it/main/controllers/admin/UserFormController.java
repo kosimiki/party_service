@@ -1,8 +1,11 @@
 package hu.unideb.inf.it.main.controllers.admin;
 
+import org.jasypt.encryption.StringEncryptor;
+
 import hu.unideb.inf.it.main.Model.User;
 import hu.unideb.inf.it.main.controllers.FormController;
 import hu.unideb.inf.it.main.security.EmailValidator;
+import hu.unideb.inf.it.main.security.StrongEncryptor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -48,8 +51,8 @@ public class UserFormController extends FormController {
 			user.setFullname(fullnameField.getText());
 			user.setUsername(usernameField.getText());
 			user.setEmail(emailField.getText());
-			//ENCRYPTÁLNI KELLENE MÉG DE NEM TUDOM MILYENNEL
-			user.setPassword(passField.getText());
+			StrongEncryptor se = new StrongEncryptor();
+			user.setPassword(se.encrypt(passField.getText()));
 			user.setPhonenumber(phoneField.getText());
 			user.setRank(rankField.getText());
 			this.getUserManager().registerUser(user);
