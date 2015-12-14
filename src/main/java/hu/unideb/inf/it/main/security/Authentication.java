@@ -11,8 +11,6 @@ public class Authentication {
 	@Autowired
 	private UserManager um;
 
-	
-
 	public boolean isSuccessfulAuthentication(String username, String password) {
 		if (Validator.isValidInput(username) && Validator.isValidInput(password)) {
 
@@ -25,6 +23,7 @@ public class Authentication {
 					return false;
 				}
 			}
+
 			return false;
 		} else {
 			return false;
