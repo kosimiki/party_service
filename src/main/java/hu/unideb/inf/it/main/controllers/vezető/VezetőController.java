@@ -1,17 +1,20 @@
 package hu.unideb.inf.it.main.controllers.vezető;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import hu.unideb.inf.it.main.Main;
 import hu.unideb.inf.it.main.Model.PartyEvent;
 import hu.unideb.inf.it.main.Model.PartyOrder;
 import hu.unideb.inf.it.main.Model.Request;
 import hu.unideb.inf.it.main.Model.StockItem;
 import hu.unideb.inf.it.main.Model.User;
 import hu.unideb.inf.it.main.controllers.BaseController;
+import hu.unideb.inf.it.main.controllers.FormController;
 import hu.unideb.inf.it.main.controllers.confirmation.Confirmation;
 import hu.unideb.inf.it.main.service.ContextManager;
 import hu.unideb.inf.it.main.service.OrderManager;
@@ -27,12 +30,17 @@ import hu.unideb.inf.it.main.service.table.TypeAndCount;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class VezetőController extends BaseController {
 
@@ -109,16 +117,34 @@ public class VezetőController extends BaseController {
 	
 	@FXML
 	void újRedendezvény() {
+		if(showEditDialog(null)){
+			reloadParties();
+		}
 
 	}
 
 	@FXML
 	void rendezvényMódosítása() {
-
+		try{
+			PartyEventTable party = rendezvények.getSelectionModel().getSelectedItem();
+		if(showEditDialog(partyManager.findOne(party.getPartyID()))){
+			reloadParties();
+		}
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
 	}
 
 	@FXML
 	void rendezvényTörlése() {
+		Confirmation cm = new Confirmation();
+		PartyEventTable party =  rendezvények.getSelectionModel().getSelectedItem();
+		boolean válasz = cm.showConfirmationWindow(this.getStage(),party.getName() ,"Biztosan törli?");
+		if(válasz == true){
+			partyManager.delete(party.getPartyID());
+			partysTable.remove(party);
+			rendezvények.setItems(partysTable);
+		}
 
 	}
 
@@ -327,4 +353,28 @@ public class VezetőController extends BaseController {
 			System.out.println(e.toString());
 		}
     }
+    
+    public boolean showEditDialog(Object element) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(Main.class
+						.getResource("/fxml/PartyEventForm.fxml"));
+			
+			AnchorPane page = (AnchorPane) loader.load();
+			Stage dialogStage = new Stage();
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(this.getStage());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+			FormController controller = loader.getController();
+			controller.init();
+			controller.setDialogStage(dialogStage);
+			controller.setElement(element);
+			dialogStage.showAndWait();
+			return controller.isOk();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

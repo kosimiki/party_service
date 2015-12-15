@@ -48,4 +48,9 @@ public class PartyEventManagerImpl implements PartyEventManager {
 		
 	}
 
+	@Override
+	public void delete(Long id) {
+		partyEventDAO.delete(id);
+	}
+
 }

@@ -29,9 +29,10 @@ public class FormController {
 
 
 	public void populateForm() {
-		System.out.println("nem megy");
+		System.out.println("új elem");
 		
 	}
+
 
 
 	public Stage getDialogStage() {

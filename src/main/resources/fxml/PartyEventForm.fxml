@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="547.0" prefWidth="794.0" styleClass="background" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.it.main.controllers.vezető.PartyEventFormController">
+   <children>
+      <Button layoutX="651.0" layoutY="357.0" mnemonicParsing="false" onAction="#mégse" prefHeight="33.0" prefWidth="127.0" text="Mégse" />
+      <Button layoutX="651.0" layoutY="307.0" mnemonicParsing="false" onAction="#rendezvényMentése" prefHeight="33.0" prefWidth="127.0" text="Rendben" />
+      <TableView fx:id="eszközökTábla" layoutX="14.0" layoutY="275.0" prefHeight="258.0" prefWidth="597.0">
+        <columns>
+          <TableColumn fx:id="megnevezés" prefWidth="177.0" text="Megnevzés" />
+          <TableColumn fx:id="típus" prefWidth="191.0" text="Típus" />
+            <TableColumn fx:id="id" prefWidth="191.0" text="ID" />
+        </columns>
+      </TableView>
+      <ChoiceBox fx:id="gépekLista" layoutX="14.0" layoutY="176.0" prefHeight="31.0" prefWidth="241.0" />
+      <ChoiceBox fx:id="textíliákLista" layoutX="275.0" layoutY="176.0" prefHeight="31.0" prefWidth="241.0" />
+      <ChoiceBox fx:id="helyszínekLista" layoutX="537.0" layoutY="176.0" prefHeight="31.0" prefWidth="241.0" />
+      <Label layoutX="14.0" layoutY="149.0" prefHeight="21.0" prefWidth="241.0" text="Gépek" />
+      <Label layoutX="275.0" layoutY="149.0" prefHeight="21.0" prefWidth="241.0" text="Textíliák" />
+      <Label layoutX="537.0" layoutY="149.0" text="Helyszínek" />
+      <TextField fx:id="rendezvényNeve" layoutX="176.0" layoutY="31.0" prefHeight="37.0" prefWidth="241.0" />
+      <TextField fx:id="rendezvényÁra" layoutX="176.0" layoutY="87.0" prefHeight="37.0" prefWidth="241.0" />
+      <Label layoutX="19.0" layoutY="39.0" prefHeight="21.0" prefWidth="241.0" text="Rendezvény neve" />
+      <Label layoutX="19.0" layoutY="95.0" prefHeight="21.0" prefWidth="127.0" text="Rendezvény ára" />
+      <Button layoutX="14.0" layoutY="225.0" mnemonicParsing="false" onAction="#hozzáadGép" prefHeight="33.0" prefWidth="241.0" text="Hozzáad" />
+      <Button layoutX="275.0" layoutY="226.0" mnemonicParsing="false" onAction="#hozzáadTextília" prefHeight="33.0" prefWidth="241.0" text="Hozzáad" />
+      <Button layoutX="537.0" layoutY="225.0" mnemonicParsing="false" onAction="#hozzáadHelyszínek" prefHeight="33.0" prefWidth="241.0" text="Hozzáad" />
+      <Button layoutX="651.0" layoutY="404.0" mnemonicParsing="false" onAction="#elemEltávolítása" prefHeight="33.0" prefWidth="127.0" text="Eltávolítás" />
+   </children>
+</AnchorPane>

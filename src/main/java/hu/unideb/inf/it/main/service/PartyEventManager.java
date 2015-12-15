@@ -20,4 +20,6 @@ public interface PartyEventManager {
 	
 	public List<StockItem> getItems(Long id);
 	
+	public void delete(Long id);
+	
 }
