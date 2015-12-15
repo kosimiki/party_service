@@ -439,5 +439,12 @@ public class VezetőController extends BaseController {
 		}
     	
     	
-    }
+    
+	}
+	@FXML
+	public void szinkron(){
+		reloadOrders();
+		reloadParties();
+		reloadRequests();
+	}
 }
