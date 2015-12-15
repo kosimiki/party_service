@@ -406,7 +406,7 @@ public class VezetőController extends BaseController {
     void riportKészítése() {
     	List<PartyOrder> orders = orderManager.getAllOrder();
     	Date ma = new Date();
-    	if(ma.getMonth()==1){
+    	if(ma.getMonth()!=1){
     		ma.setMonth(ma.getMonth()-1);
     	}else{
     		ma.setMonth(12);
@@ -414,7 +414,7 @@ public class VezetőController extends BaseController {
     	}
     	List<PartyOrder> toSave = new ArrayList<>();
     	for(PartyOrder order: orders){
-    		if(order.getDone() && order.getPartyDate().before(ma)){
+    		if(order.getDone() && order.getPartyDate().after(ma)){
     			toSave.add(order);
     		}
     	}
