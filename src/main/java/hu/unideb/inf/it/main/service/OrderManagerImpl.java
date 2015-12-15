@@ -34,4 +34,14 @@ public class OrderManagerImpl implements OrderManager {
 		
 	}
 
+	@Override
+	public PartyOrder getOne(Long id) {
+		return orderDAO.findOne(id);
+	}
+
+	@Override
+	public void save(PartyOrder party) {
+		orderDAO.save(party);
+	}
+
 }

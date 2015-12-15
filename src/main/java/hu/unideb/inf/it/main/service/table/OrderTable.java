@@ -7,6 +7,7 @@ public class OrderTable {
 		private String userName;
 		private String userPhone;
 		private String userEmail;
+		private String state;
 		public String getPartyName() {
 			return partyName;
 		}
@@ -37,5 +38,11 @@ public class OrderTable {
 		public void setOrderID(Long orderID) {
 			this.orderID = orderID;
 		}
-		
+		public String getState() {
+			return state;
+		}
+		public void setState(String state) {
+			this.state = state;
+		}
+	
 }

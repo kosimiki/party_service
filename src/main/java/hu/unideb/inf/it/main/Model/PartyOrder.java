@@ -21,6 +21,10 @@ public class PartyOrder {
 	private Date partyDate;
 	@Temporal(TemporalType.DATE)
 	private Date requestDate;
+	
+	private Boolean done;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,6 +54,12 @@ public class PartyOrder {
 	}
 	public void setRequestDate(Date requestDate) {
 		this.requestDate = requestDate;
+	}
+	public Boolean getDone() {
+		return done;
+	}
+	public void setDone(Boolean done) {
+		this.done = done;
 	}
 	
 	

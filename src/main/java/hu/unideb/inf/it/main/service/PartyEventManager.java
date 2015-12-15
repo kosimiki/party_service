@@ -22,4 +22,5 @@ public interface PartyEventManager {
 	
 	public void delete(Long id);
 	
+	
 }

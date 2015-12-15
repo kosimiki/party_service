@@ -15,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -69,8 +71,17 @@ public class AdminisztrátorController extends BaseController {
 	@FXML
 	void felhasználóMódosítása() {
 		User user = table.getSelectionModel().getSelectedItem();
+		if(user!=null){
 		this.showEditDialog(user);
 		reload();
+		}else{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(this.getStage());
+			alert.setTitle("Oops!");
+			alert.setHeaderText("Nincs felhasználó kiválasztva.");
+			alert.showAndWait();
+		
+		}
 	}
 
 	private void reload() {
@@ -89,6 +100,13 @@ public class AdminisztrátorController extends BaseController {
 				reload();
 
 			}
+		}else{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(this.getStage());
+			alert.setTitle("Oops!");
+			alert.setHeaderText("Nincs felhasználó kiválasztva.");
+			alert.showAndWait();
+		
 		}
 	}
 
@@ -114,5 +132,7 @@ public class AdminisztrátorController extends BaseController {
 			return false;
 		}
 	}
+	
 
+    
 }

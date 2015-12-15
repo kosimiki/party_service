@@ -1,7 +1,11 @@
 package hu.unideb.inf.it.main.controllers.vezető;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +57,8 @@ public class VezetőController extends BaseController {
 	@FXML
 	private TableColumn<RequestTable, String> vevőEmail;
 
+	@FXML
+	private TableColumn<OrderTable, String> rendelésÁllapota;
 	@FXML
 	private TableColumn<OrderTable, String> megrendelőNeve;
 
@@ -114,10 +120,10 @@ public class VezetőController extends BaseController {
 	private ObservableList<RequestTable> requestsTable;
 	private ObservableList<PartyEventTable> partysTable;
 	private ObservableList<StockItemTable> itemsTable;
-	
+
 	@FXML
 	void újRedendezvény() {
-		if(showEditDialog(null)){
+		if (showEditDialog(null)) {
 			reloadParties();
 		}
 
@@ -125,12 +131,12 @@ public class VezetőController extends BaseController {
 
 	@FXML
 	void rendezvényMódosítása() {
-		try{
+		try {
 			PartyEventTable party = rendezvények.getSelectionModel().getSelectedItem();
-		if(showEditDialog(partyManager.findOne(party.getPartyID()))){
-			reloadParties();
-		}
-		}catch(Exception e){
+			if (showEditDialog(partyManager.findOne(party.getPartyID()))) {
+				reloadParties();
+			}
+		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 	}
@@ -138,9 +144,9 @@ public class VezetőController extends BaseController {
 	@FXML
 	void rendezvényTörlése() {
 		Confirmation cm = new Confirmation();
-		PartyEventTable party =  rendezvények.getSelectionModel().getSelectedItem();
-		boolean válasz = cm.showConfirmationWindow(this.getStage(),party.getName() ,"Biztosan törli?");
-		if(válasz == true){
+		PartyEventTable party = rendezvények.getSelectionModel().getSelectedItem();
+		boolean válasz = cm.showConfirmationWindow(this.getStage(), party.getName(), "Biztosan törli?");
+		if (válasz == true) {
 			partyManager.delete(party.getPartyID());
 			partysTable.remove(party);
 			rendezvények.setItems(partysTable);
@@ -159,19 +165,19 @@ public class VezetőController extends BaseController {
 	void ajánlatElfogadása() {
 		RequestTable rt = new RequestTable();
 		rt = ajánlatok.getSelectionModel().getSelectedItem();
-		if(rt==null){
+		if (rt == null) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.initOwner(this.getStage());
 			alert.setTitle("Oops!");
 			alert.setHeaderText("Nincs ajánlat kiválasztva.");
 			alert.showAndWait();
-			}else{
-				Request request = requestManager.findOne(rt.getRequestID());
-				request.setState("Elfogadva");
-				
-				requestManager.accept(request);
-				reloadRequests();
-			}
+		} else {
+			Request request = requestManager.findOne(rt.getRequestID());
+			request.setState("Elfogadva");
+
+			requestManager.accept(request);
+			reloadRequests();
+		}
 
 	}
 
@@ -179,18 +185,18 @@ public class VezetőController extends BaseController {
 	void ajánlatElutasítása() {
 		RequestTable rt = new RequestTable();
 		rt = ajánlatok.getSelectionModel().getSelectedItem();
-		if(rt==null){
+		if (rt == null) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.initOwner(this.getStage());
 			alert.setTitle("Oops!");
 			alert.setHeaderText("Nincs ajánlat kiválasztva.");
 			alert.showAndWait();
-			}else{
-				Request request = requestManager.findOne(rt.getRequestID());
-				request.setState("Elutasítva");
-				requestManager.accept(request);
-				reloadRequests();
-			}
+		} else {
+			Request request = requestManager.findOne(rt.getRequestID());
+			request.setState("Elutasítva");
+			requestManager.accept(request);
+			reloadRequests();
+		}
 
 	}
 
@@ -205,12 +211,23 @@ public class VezetőController extends BaseController {
 			alert.setHeaderText("Nincs rendelés kiválasztva.");
 			alert.showAndWait();
 		} else {
-			Confirmation cm = new Confirmation();
-			boolean válasz = cm.showConfirmationWindow(this.getStage(), "", "Biztosan szeretné \n teljesítetté tenni?");
-			if(válasz==true){
-				orderManager.delete(ot.getOrderID());
-				ordersTable.remove(ot);
-				reloadOrders();
+			if (ot.getState().equals("nem")) {
+				Confirmation cm = new Confirmation();
+				boolean válasz = cm.showConfirmationWindow(this.getStage(), "",
+						"Biztosan szeretné \n teljesítetté tenni?");
+				if (válasz == true) {
+					PartyOrder order = orderManager.getOne(ot.getOrderID());
+					order.setDone(true);
+					orderManager.save(order);
+					PartyEvent party = partyManager.findOne(order.getPartyID());
+					List<StockItem> items = party.getItems();
+					for (StockItem item : items) {
+						item.setRentCount(item.getRentCount() + 1);
+						stockItemManager.saveStockItem(item);
+					}
+					reloadParties();
+					reloadOrders();
+				}
 			}
 		}
 	}
@@ -223,15 +240,14 @@ public class VezetőController extends BaseController {
 		requestManager = cm.getContext().getBean(RequestManager.class);
 		stockItemManager = cm.getContext().getBean(StockItemManager.class);
 		userManager = cm.getContext().getBean(UserManager.class);
-		
+
 		reloadOrders();
 		reloadParties();
 		reloadRequests();
 	}
-	
 
-	private void reloadParties(){
-		try{
+	private void reloadParties() {
+		try {
 			List<PartyEvent> events = partyManager.getAllPartyEvent();
 			List<PartyEventTable> eventTable = new ArrayList<>();
 			for (PartyEvent event : events) {
@@ -243,7 +259,7 @@ public class VezetőController extends BaseController {
 				row.setPartyID(event.getId());
 				eventTable.add(row);
 			}
-			
+
 			partysTable = FXCollections.observableArrayList(eventTable);
 			rendezvényNeve.setCellValueFactory(new PropertyValueFactory<PartyEventTable, String>("name"));
 			rendezvényHelyszíne.setCellValueFactory(new PropertyValueFactory<PartyEventTable, String>("placeName"));
@@ -251,11 +267,12 @@ public class VezetőController extends BaseController {
 
 			rendezvények.setItems(partysTable);
 
-		}catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
 	}
-	private void reloadOrders(){
+
+	private void reloadOrders() {
 
 		try {
 			List<PartyOrder> orders = orderManager.getAllOrder();
@@ -268,98 +285,105 @@ public class VezetőController extends BaseController {
 				row.setUserEmail(user.getEmail());
 				row.setOrderID(order.getId());
 				row.setUserPhone(user.getPhonenumber());
+				if (order.getDone()) {
+					row.setState("igen");
+				} else {
+					row.setState("nem");
+				}
+
 				orderTable.add(row);
 			}
-				
+
 			ordersTable = FXCollections.observableArrayList(orderTable);
 			megrendeltRendezényNeve.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("partyName"));
 			megrendelőNeve.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("userName"));
 			megrendelőEmail.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("userEmail"));
 			megrendelőTelefonszáma.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("userPhone"));
+			rendelésÁllapota.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("state"));
+
 			megrendelések.setItems(ordersTable);
 		} catch (Exception e) {
 		}
 
 	}
-	private void reloadRequests(){
-		try{
-		List<Request> requests = requestManager.findAllRequest();
-		List<RequestTable> requestTable = new ArrayList<>();
-		for (Request request : requests) {
-			RequestTable row = new RequestTable();
-			User user = userManager.findOne(request.getUserID());
-			row.setRequest(request.getRequest());
-			row.setState(request.getState());
-			row.setUserName(user.getFullname());
-			row.setUserEmail(user.getEmail());
-			row.setUserPhone(user.getPhonenumber());
-			row.setRequestID(request.getId());
-			requestTable.add(row);
+
+	private void reloadRequests() {
+		try {
+			List<Request> requests = requestManager.findAllRequest();
+			List<RequestTable> requestTable = new ArrayList<>();
+			for (Request request : requests) {
+				RequestTable row = new RequestTable();
+				User user = userManager.findOne(request.getUserID());
+				row.setRequest(request.getRequest());
+				row.setState(request.getState());
+				row.setUserName(user.getFullname());
+				row.setUserEmail(user.getEmail());
+				row.setUserPhone(user.getPhonenumber());
+				row.setRequestID(request.getId());
+				requestTable.add(row);
+			}
+
+			requestsTable = FXCollections.observableArrayList(requestTable);
+			ajánlatLétrehozó.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("userName"));
+			ajánlatSzövege.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("request"));
+			vevőTelefonszáma.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("userPhone"));
+			vevőEmail.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("userEmail"));
+			ajánlatÁllapota.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("state"));
+
+			ajánlatok.setItems(requestsTable);
+		} catch (Exception e) {
+
 		}
 
-	 requestsTable = FXCollections.observableArrayList(requestTable);
-		ajánlatLétrehozó.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("userName"));
-		ajánlatSzövege.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("request"));
-		vevőTelefonszáma.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("userPhone"));
-		vevőEmail.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("userEmail"));
-		ajánlatÁllapota.setCellValueFactory(new PropertyValueFactory<RequestTable, String>("state"));
-
-		ajánlatok.setItems(requestsTable);
-		}catch(Exception e){
-			
-		}
-	
 	}
-	
 
-    @FXML
-    void rendezvényRészletei() {
-    	try {
-    		PartyEventTable party = rendezvények.getSelectionModel().getSelectedItem();
-    		Long id = party.getPartyID();
-    		
+	@FXML
+	void rendezvényRészletei() {
+		try {
+			PartyEventTable party = rendezvények.getSelectionModel().getSelectedItem();
+			Long id = party.getPartyID();
+
 			List<StockItem> items = partyManager.getItems(id);
 			System.out.println("hány elem" + items.size());
-			
+
 			List<StockItemTable> itemTable = new ArrayList<>();
 			Map<String, TypeAndCount> names = new HashMap<>();
 			for (StockItem item : items) {
 				System.out.println(item.getName());
-				if(names.containsKey(item.getName())){
-					names.put(item.getName(),new TypeAndCount(item.getType() ,  names.get(item.getName()).getCount()+1));
-				}else{
-					if(!item.getType().equals("helyszín")){
+				if (names.containsKey(item.getName())) {
+					names.put(item.getName(),
+							new TypeAndCount(item.getType(), names.get(item.getName()).getCount() + 1));
+				} else {
+					if (!item.getType().equals("helyszín")) {
 						names.put(item.getName(), new TypeAndCount(item.getType(), 1));
 
 					}
-								}
+				}
 			}
-			for( Entry<String, TypeAndCount> item: names.entrySet()){
+			for (Entry<String, TypeAndCount> item : names.entrySet()) {
 				StockItemTable row = new StockItemTable();
 				row.setName(item.getKey());
 				row.setType(item.getValue().getType());
 				row.setCount(item.getValue().getCount());
 				itemTable.add(row);
 			}
-			
-				
+
 			itemsTable = FXCollections.observableArrayList(itemTable);
 			kellékNeve.setCellValueFactory(new PropertyValueFactory<StockItemTable, String>("name"));
 			kellékDarabaszám.setCellValueFactory(new PropertyValueFactory<StockItemTable, Integer>("count"));
 			kellékTípusa.setCellValueFactory(new PropertyValueFactory<StockItemTable, String>("type"));
-			
+
 			kellékek.setItems(itemsTable);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-    }
-    
-    public boolean showEditDialog(Object element) {
+	}
+
+	public boolean showEditDialog(Object element) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(Main.class
-						.getResource("/fxml/PartyEventForm.fxml"));
-			
+			loader.setLocation(Main.class.getResource("/fxml/PartyEventForm.fxml"));
+
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -377,4 +401,43 @@ public class VezetőController extends BaseController {
 			return false;
 		}
 	}
+	
+	@FXML
+    void riportKészítése() {
+    	List<PartyOrder> orders = orderManager.getAllOrder();
+    	Date ma = new Date();
+    	if(ma.getMonth()==1){
+    		ma.setMonth(ma.getMonth()-1);
+    	}else{
+    		ma.setMonth(12);
+    		ma.setYear(ma.getYear()-1);
+    	}
+    	List<PartyOrder> toSave = new ArrayList<>();
+    	for(PartyOrder order: orders){
+    		if(order.getDone() && order.getPartyDate().before(ma)){
+    			toSave.add(order);
+    		}
+    	}
+    	PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("Riport-"+ma.toString()+".txt", "UTF-8");
+			Integer összeg = 0;
+			for(PartyOrder order: toSave){
+				PartyEvent party = partyManager.findOne(order.getId());
+				writer.println(order.getId()+" | "+ party.getName() + " | " + order.getRequestDate().toString() +" | " +party.getPrice().toString() );
+				összeg+=party.getPrice();
+			}
+			writer.println("A hónap bevétele: " + összeg);
+			writer.flush();
+			
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			
+			
+		} finally{
+			if(writer!=null)
+			writer.close();
+		}
+    	
+    	
+    }
 }

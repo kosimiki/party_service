@@ -53,4 +53,5 @@ public class PartyEventManagerImpl implements PartyEventManager {
 		partyEventDAO.delete(id);
 	}
 
+
 }

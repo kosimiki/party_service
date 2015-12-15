@@ -12,5 +12,9 @@ public interface OrderManager {
 	public void delete(PartyOrder order);
 	
 	public void delete(Long id);
+	
+	public PartyOrder getOne(Long id);
+	
+	public void save(PartyOrder party);
 
 }
