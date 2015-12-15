@@ -1,5 +1,6 @@
 package hu.unideb.inf.it.main.controllers.vezető;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -412,6 +413,7 @@ public class VezetőController extends BaseController {
     		ma.setMonth(12);
     		ma.setYear(ma.getYear()-1);
     	}
+    	System.out.println("DATE : " + ma.toString());
     	List<PartyOrder> toSave = new ArrayList<>();
     	for(PartyOrder order: orders){
     		if(order.getDone() && order.getPartyDate().after(ma)){
@@ -420,18 +422,23 @@ public class VezetőController extends BaseController {
     	}
     	PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("Riport-"+ma.toString()+".txt", "UTF-8");
+			File file = new File("Riport-"+ma.getYear()+"-"+ ma.getMonth() +"-"+ ma.getDay()+".txt");
+		
+			writer = new PrintWriter(file);
 			Integer összeg = 0;
 			for(PartyOrder order: toSave){
-				PartyEvent party = partyManager.findOne(order.getId());
-				writer.println(order.getId()+" | "+ party.getName() + " | " + order.getRequestDate().toString() +" | " +party.getPrice().toString() );
+				PartyEvent party = partyManager.findOne(order.getPartyID());
+				if(writer!=null)
+				writer.write(order.getId()+"\t | "+ party.getName()  +"\t | " +party.getPrice().toString()
+						+" | " + order.getPartyDate().toString()+ 
+						"\t \n" );
 				összeg+=party.getPrice();
 			}
-			writer.println("A hónap bevétele: " + összeg);
+			writer.write("A hónap bevétele: " + összeg);
 			writer.flush();
 			
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			
+		} catch (Exception e) {
+			System.out.println(e.toString());
 			
 		} finally{
 			if(writer!=null)
