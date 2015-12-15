@@ -192,3 +192,9 @@
   -fx-text-fill: white;
   -fx-background-color: #1d1d1d;
 }
+
+.choice-box .label{
+      -fx-background-color: 
+        #3a3a3a;
+        -fx-text-fill: white; 
+}
