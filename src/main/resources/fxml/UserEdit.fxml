@@ -20,7 +20,7 @@
             <Label prefHeight="21.0" prefWidth="103.0" text="E-mail cím" GridPane.rowIndex="4" />
             <TextField fx:id="emailField" onMouseClicked="#resetValue" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefHeight="21.0" prefWidth="103.0" text="Típus" GridPane.rowIndex="5" />
-            <TextField fx:id="rankField" onMouseClicked="#resetValue" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="típus" prefHeight="31.0" prefWidth="335.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="135.0" />

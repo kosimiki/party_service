@@ -123,6 +123,7 @@ public class AdminisztrátorController extends BaseController {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			FormController controller = loader.getController();
+			controller.init();
 			controller.setDialogStage(dialogStage);
 			controller.setElement(element);
 			dialogStage.showAndWait();
